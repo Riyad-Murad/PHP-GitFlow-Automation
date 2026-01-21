@@ -1,0 +1,4 @@
+.env
+bootstrap
+vendor
+node_modules
