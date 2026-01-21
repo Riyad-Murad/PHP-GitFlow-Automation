@@ -1,0 +1,29 @@
+services:
+  laravel-server:
+    image: riyadmurad44/gitflow_automation_laravel:20
+    environment:
+      - LARAVEL_DATABASE_HOST=mysql-database
+      - LARAVEL_DATABASE_NAME=laravel_prod
+      - LARAVEL_DATABASE_USER=root
+      - LARAVEL_DATABASE_PASSWORD=pass
+      - LARAVEL_DATABASE_PORT_NUMBER=3306
+    ports:
+      - 8000:80
+    depends_on:
+      - mysql-database
+    restart: always
+    command: ./dockerShell.sh
+
+  mysql-database:
+    image: mysql:8.0
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: laravel_prod
+    volumes:
+      - mysql-data:/var/lib/mysql   
+
+volumes:
+  mysql-data:
